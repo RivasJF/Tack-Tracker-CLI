@@ -1,0 +1,14 @@
+{
+  "name": "task-tracker-cli",
+  "version": "1.0.0",
+  "description": "Proyect one on Backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "Task"
+  ],
+  "author": "RivasJF",
+  "license": "ISC"
+}
