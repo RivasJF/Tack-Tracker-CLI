@@ -4,7 +4,7 @@
   "description": "Proyect one on Backend",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js"
+    "dev": "node src/index.js"
   },
   "keywords": [
     "Task"
