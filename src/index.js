@@ -1,11 +1,11 @@
-var fs = require('fs');
+const { CrearProducto } = require('./Module/ClassTask.js');
+//const { readJson } = require('./Module/readfile.js')
 
+const main = async() => {
+    // const lee = await readJson();
+    // console.log(lee)
+    const a = CrearProducto(1,"Alguno",123.22,true)
+    console.log(a)
+}
 
-
-fs.readFile('Data/index.json', 'utf8', function(err, data) {
-    if (err){
-        console.log(err+"\nnot found");
-        return;
-    }
-        console.log(data);
-});
+main();
