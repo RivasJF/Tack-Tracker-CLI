@@ -10,5 +10,9 @@
     "Task"
   ],
   "author": "RivasJF",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "inquirer": "^12.3.2"
+  }
 }
