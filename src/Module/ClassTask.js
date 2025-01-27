@@ -12,6 +12,8 @@ const CrearProducto = (id, nombre, precio, disponible)=>{
   return nuevoProducto;
 }
 
+
+
 module.exports={
   CrearProducto
 }

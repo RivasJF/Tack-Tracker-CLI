@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Proyect one on Backend",
   "main": "index.js",
+  "type": "module",
   "scripts": {
+    "mod": "node src/Module/readfile.js",
     "dev": "node src/index.js"
   },
   "keywords": [

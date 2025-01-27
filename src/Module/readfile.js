@@ -1,36 +1,26 @@
+import fs_promises from "fs/promises";
+import path from "path";
+import 'colors'
 
-const {readFile} = require("fs/promises")
-const path = require('path');
 
-const pathJson = path.resolve('./Data/index.json')
-const pathG = 'C:/Users/jonat/Desktop/Task Tracker CLI/src/Data/ou.json'
-const pathH = 'C:/Users/jonat/Desktop/Task Tracker CLI/src/Data/index.txt'
+const pathJson = path.resolve('./src/Data/index.json')
+const pathG = 'C:\\Users\\Linux\\Desktop\\TaskCLI\\Tack-Tracker-CLI\\src\\Data\\index.json'
 
 
 
 const readJson=async()=>{
     try{
-        const res = JSON.parse(await readFile(pathG,'utf-8'))
+        const res = JSON.parse(await fs_promises.readFile(pathG,'utf-8'))
         return res;
     } catch(err){
-        return "not found";
+        return ("not found".red);
     }
 }
-
 // const principal =async()=>{
-//     // const lee = await readJson();
-//     // console.log(lee);
-//     // console.log(pathG)
-//     // console.log(pathJson)
-//     const erc = await writeJson();
-//     console.log(erc)
+//     console.log(pathJson)
+//     const lee = await readJson();
+//     console.log(lee);
 // }
-
 // principal();
 
-
-module.exports={
-    readJson
-}
-
-
+export {readJson}
