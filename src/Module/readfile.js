@@ -10,7 +10,7 @@ const pathG = 'C:\\Users\\Linux\\Desktop\\TaskCLI\\Tack-Tracker-CLI\\src\\Data\\
 
 const readJson=async()=>{
     try{
-        const res = JSON.parse(await fs_promises.readFile(pathG,'utf-8'))
+        const res = JSON.parse(await fs_promises.readFile(pathJson,'utf-8'))
         return res;
     } catch(err){
         return ("not found".red);

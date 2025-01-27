@@ -4,6 +4,9 @@
   "description": "Proyect one on Backend",
   "main": "index.js",
   "type": "module",
+  "bin": {
+    "taskC": "./src/index.js"
+  },
   "scripts": {
     "mod": "node src/Module/readfile.js",
     "dev": "node src/index.js"
@@ -15,6 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "colors": "^1.4.0",
+    "commander": "^13.1.0",
     "inquirer": "^12.3.2"
   }
 }

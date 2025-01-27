@@ -24,9 +24,14 @@ const preguntas = {
 
 async function opera1(num) {
     const res = await readJson()
-    console.log(res)
+    console.table(res.productos.map(task=>({
+        id:task.id,
+        descipcion:task.description,
+        status:task.status,
+    })))//.filter(task=>task.status=='done')) //---filtrar segun valores
     console.log('Acccionar = ' + num)
 }
+
 const menu = async()=>{
     console.clear()
     console.log('#########################################\n'.blue)
