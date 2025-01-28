@@ -1,8 +1,25 @@
 {
   "productos": [
-    { "id": 0, "nombre": "Camiseta", "precio": 19.99, "disponible": true },
-    { "id": 1, "nombre": "Pantalón", "precio": 29.99, "disponible": false },
-    { "id": 2, "nombre": "Otro", "precio": 19.99, "disponible": true },
-    { "id": 3, "nombre": "OtroMas", "precio": 23.3, "disponible": false }
+    {
+      "id": 0,
+      "description": "Full Task",
+      "status": "done",
+      "createdAt": true,
+      "updrade":1
+    },
+    {
+      "id": 1,
+      "description": "Full Task",
+      "status": "todo",
+      "createdAt": true,
+      "updrade":1
+    },
+    {
+      "id": 2,
+      "description": "Full Task",
+      "status": "in_progress",
+      "createdAt": true,
+      "updrade":1
+    }
   ]
 }

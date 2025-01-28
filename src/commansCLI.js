@@ -1,6 +1,6 @@
 import { Command } from "commander";
 import inquirer from "inquirer";
-import { readJson,readJsonInProgress,readJsonDone,readJsonTodo} from "./commands/read.js";
+import { readJsonAll,readJsonInProgress,readJsonDone,readJsonTodo} from "./commands/read.js";
 
 const program = new Command()
 
@@ -13,7 +13,7 @@ program
     .alias('l')
     .description("list task")
     .action(async () => {
-        console.table( await readJson())
+        console.table( await readJsonAll())
     })
 
 program

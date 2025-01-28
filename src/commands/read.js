@@ -8,10 +8,22 @@ const pathJson = path.resolve('./src/Data/index.json')
 const readJson=async()=>{
     try{
         const res = JSON.parse(await fs_promises.readFile(pathJson,'utf-8'))
-        const table = res.productos.map(task=>({
+        const table = res.task
+        return table;
+    } catch(err){
+        return ("not found".red);
+    }
+}
+
+const readJsonAll=async()=>{
+    try{
+        const res = JSON.parse(await fs_promises.readFile(pathJson,'utf-8'))
+        const table = res.task.map(task=>({
             id:task.id,
-            descipcion:task.description,
+            desciption:task.description,
             status:task.status,
+            createdAt:task.createdAt,
+            updrade:task.updrade,
         }))
         return table;
     } catch(err){
@@ -22,10 +34,12 @@ const readJson=async()=>{
 const readJsonDone=async()=>{
     try{
         const res = JSON.parse(await fs_promises.readFile(pathJson,'utf-8'))
-        const table = res.productos.map(task=>({
+        const table = res.task.map(task=>({
             id:task.id,
-            descipcion:task.description,
+            desciption:task.description,
             status:task.status,
+            createdAt:task.createdAt,
+            updrade:task.updrade,
         })).filter(task=>task.status=='done')
         return table;
     } catch(err){
@@ -36,10 +50,12 @@ const readJsonDone=async()=>{
 const readJsonTodo=async()=>{
     try{
         const res = JSON.parse(await fs_promises.readFile(pathJson,'utf-8'))
-        const table = res.productos.map(task=>({
+        const table = res.task.map(task=>({
             id:task.id,
-            descipcion:task.description,
+            desciption:task.description,
             status:task.status,
+            createdAt:task.createdAt,
+            updrade:task.updrade,
         })).filter(task=>task.status=='todo')
         return table;
     } catch(err){
@@ -50,10 +66,12 @@ const readJsonTodo=async()=>{
 const readJsonInProgress=async()=>{
     try{
         const res = JSON.parse(await fs_promises.readFile(pathJson,'utf-8'))
-        const table = res.productos.map(task=>({
+        const table = res.task.map(task=>({
             id:task.id,
-            descipcion:task.description,
+            desciption:task.description,
             status:task.status,
+            createdAt:task.createdAt,
+            updrade:task.updrade,
         })).filter(task=>task.status=='in_progress')
         return table;
     } catch(err){
@@ -61,4 +79,4 @@ const readJsonInProgress=async()=>{
     }
 }
 
-export {readJson,readJsonInProgress,readJsonDone,readJsonTodo}
+export {readJsonAll,readJsonInProgress,readJsonDone,readJsonTodo}
