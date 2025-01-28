@@ -1,1 +1,25 @@
-{"task":[{"desciption":"Jugar mucho","id":0,"status":"todo","createdAt":"Mon, 20 Jan 2025 18:24:07 GMT","updrade":"Tue, 28 Jan 2025 19:13:24 GMT"},{"desciption":"Leer","id":1,"status":"in progress","createdAt":"Tue, 28 Jan 2025 18:26:16 GMT","updrade":"Tue, 28 Jan 2025 19:19:58 GMT"},{"desciption":"Sabias que","id":2,"status":"done","createdAt":"Tue, 28 Jan 2025 18:40:38 GMT","updrade":"Tue, 28 Jan 2025 19:27:40 GMT"}]}
+{
+  "task": [
+    {
+      "desciption": "Jugar mucho",
+      "id": 0,
+      "status": "todo",
+      "createdAt": "Mon, 20 Jan 2025 18:24:07 GMT",
+      "updrade": "Tue, 28 Jan 2025 19:13:24 GMT"
+    },
+    {
+      "desciption": "Leer",
+      "id": 1,
+      "status": "in progress",
+      "createdAt": "Tue, 28 Jan 2025 18:26:16 GMT",
+      "updrade": "Tue, 28 Jan 2025 19:19:58 GMT"
+    },
+    {
+      "desciption": "Sabias que",
+      "id": 2,
+      "status": "done",
+      "createdAt": "Tue, 28 Jan 2025 18:40:38 GMT",
+      "updrade": "Tue, 28 Jan 2025 19:27:40 GMT"
+    }
+  ]
+}

@@ -8,7 +8,6 @@
     "taskC": "./src/index.js"
   },
   "scripts": {
-    "mod": "node src/Module/readfile.js",
     "dev": "node src/index.js"
   },
   "keywords": [
