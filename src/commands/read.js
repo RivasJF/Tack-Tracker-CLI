@@ -4,11 +4,10 @@ import 'colors'
 
 const pathJson = path.resolve('./src/Data/index.json')
 
-
 const readJson=async()=>{
     try{
         const res = JSON.parse(await fs_promises.readFile(pathJson,'utf-8'))
-        const table = res.task
+        const table = res
         return table;
     } catch(err){
         return ("not found".red);
@@ -17,10 +16,10 @@ const readJson=async()=>{
 
 const readJsonAll=async()=>{
     try{
-        const res = JSON.parse(await fs_promises.readFile(pathJson,'utf-8'))
+        const res = await readJson()
         const table = res.task.map(task=>({
             id:task.id,
-            desciption:task.description,
+            desciption:task.desciption,
             status:task.status,
             createdAt:task.createdAt,
             updrade:task.updrade,
@@ -33,14 +32,8 @@ const readJsonAll=async()=>{
 
 const readJsonDone=async()=>{
     try{
-        const res = JSON.parse(await fs_promises.readFile(pathJson,'utf-8'))
-        const table = res.task.map(task=>({
-            id:task.id,
-            desciption:task.description,
-            status:task.status,
-            createdAt:task.createdAt,
-            updrade:task.updrade,
-        })).filter(task=>task.status=='done')
+        const res = await readJsonAll()
+        const table = res.filter(task=>task.status=='done')
         return table;
     } catch(err){
         return ("not found".red);
@@ -49,14 +42,8 @@ const readJsonDone=async()=>{
 
 const readJsonTodo=async()=>{
     try{
-        const res = JSON.parse(await fs_promises.readFile(pathJson,'utf-8'))
-        const table = res.task.map(task=>({
-            id:task.id,
-            desciption:task.description,
-            status:task.status,
-            createdAt:task.createdAt,
-            updrade:task.updrade,
-        })).filter(task=>task.status=='todo')
+        const res = await readJsonAll()
+        const table = res.filter(task=>task.status=='todo')
         return table;
     } catch(err){
         return ("not found".red);
@@ -65,18 +52,12 @@ const readJsonTodo=async()=>{
 
 const readJsonInProgress=async()=>{
     try{
-        const res = JSON.parse(await fs_promises.readFile(pathJson,'utf-8'))
-        const table = res.task.map(task=>({
-            id:task.id,
-            desciption:task.description,
-            status:task.status,
-            createdAt:task.createdAt,
-            updrade:task.updrade,
-        })).filter(task=>task.status=='in_progress')
+        const res = await readJsonAll()
+        const table = res.filter(task=>task.status=='in progress')
         return table;
     } catch(err){
         return ("not found".red);
     }
 }
 
-export {readJsonAll,readJsonInProgress,readJsonDone,readJsonTodo}
+export {readJson,readJsonAll,readJsonInProgress,readJsonDone,readJsonTodo}

@@ -1,6 +1,8 @@
 import { Command } from "commander";
-import inquirer from "inquirer";
 import { readJsonAll,readJsonInProgress,readJsonDone,readJsonTodo} from "./commands/read.js";
+import { CreateTask } from "./commands/add.js";
+import { DeleteTask } from "./commands/delete.js";
+import { EditTask, MarkTaskDone, MarkTaskInProgress } from "./commands/edit.js";
 
 const program = new Command()
 
@@ -9,9 +11,45 @@ program
     .description("Software task manager CLI")
 
 program
+    .command('delete <id>')
+    .description("delete Task for id")
+    .action(async (id) => {
+        await DeleteTask(id)
+    })
+
+program
+    .command('edit <id>')
+    .description("edit task for id")
+    .action(async (id) => {
+        await EditTask(id)
+    })
+
+program
+    .command('markIP <id>')
+    .description("Mark Task in-progress")
+    .action(async (id) => {
+        await MarkTaskInProgress(id)
+    })
+
+program
+    .command('markDone <id>')
+    .description("Mark Task done")
+    .action(async (id) => {
+        await MarkTaskDone(id)
+    })
+
+program
+    .command('add')
+    .alias('a')
+    .description("Creat new task")
+    .action(async () => {
+        await CreateTask()
+    })
+
+program
     .command('list')
     .alias('l')
-    .description("list task")
+    .description("list All Task")
     .action(async () => {
         console.table( await readJsonAll())
     })
@@ -38,24 +76,6 @@ program
     .description("list task in-progress")
     .action(async () => {
         console.table( await readJsonInProgress())
-    })
-
-program
-    .command('p')
-    .action(async()=>{
-        const res= await inquirer.prompt([
-            {
-                type:"input",
-                name:'title',
-                message:"Name task?"
-            },{
-                type:"input",
-                name:'desc',
-                message:"Description task?"
-            }
-            ])
-        console.log("enterado: ")
-        console.log(res)
     })
 
 export {program}

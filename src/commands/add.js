@@ -1,27 +1,34 @@
 import inquirer from "inquirer";
-//import { readJson } from "./read.js";
+import { readJson } from "./read.js";
+import { writeJson } from "./write.js";
 
-const main = async () => {
-  var datos = {task:[]}
-  const res = await inquirer.prompt([
+const CreateTask = async () => {
+  const datos = await readJson()
+
+  const newTask = await inquirer.prompt([
     {
       type: "input",
-      name: "title",
-      message: "Name task?",
-    },
-    {
-      type: "input",
-      name: "desc",
+      name: "desciption",
       message: "Description task?",
     },
   ]);
-  console.log("enterado: ");
-  res.id = 0;
-  res.createAt = new Date().toUTCString();
-  res.updrade = 0;
+  newTask.id = 0;
+  newTask.status='todo'
+  newTask.createdAt = new Date().toUTCString();
+  newTask.updrade = newTask.createdAt;
 
-  datos.task.push(res)
-  console.log(datos);
+  datos.task.push(newTask)
+
+  //ordenar id
+  var ind = 0;
+  for (const key of datos.task) {
+      if (key.id!=ind) {
+          key.id=ind
+      }
+      ind++;
+  }
+  
+  console.log((await writeJson(datos)).green)
 };
 
-main();
+export {CreateTask}
