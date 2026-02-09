@@ -1,9 +1,10 @@
-
 import fs_promises from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "url";
 import 'colors'
 
-const pathJson = path.resolve('./src/Data/index.json')
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const pathJson = path.join(__dirname, '..', 'Data', 'index.json');
 
 
 const writeJson=async(datas)=>{

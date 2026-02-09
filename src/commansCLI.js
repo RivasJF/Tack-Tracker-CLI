@@ -7,11 +7,12 @@ import { EditTask, MarkTaskDone, MarkTaskInProgress } from "./commands/edit.js";
 const program = new Command()
 
 program
-    .version(0.1)
+    .version(1.1)
     .description("Software task manager CLI")
 
 program
     .command('delete <id>')
+    .alias('d')
     .description("delete Task for id")
     .action(async (id) => {
         await DeleteTask(id)
@@ -19,6 +20,7 @@ program
 
 program
     .command('edit <id>')
+    .alias('e')
     .description("edit task for id")
     .action(async (id) => {
         await EditTask(id)
@@ -26,6 +28,7 @@ program
 
 program
     .command('markIP <id>')
+    .alias('mip')
     .description("Mark Task in-progress")
     .action(async (id) => {
         await MarkTaskInProgress(id)
@@ -33,6 +36,7 @@ program
 
 program
     .command('markDone <id>')
+    .alias('md')
     .description("Mark Task done")
     .action(async (id) => {
         await MarkTaskDone(id)
