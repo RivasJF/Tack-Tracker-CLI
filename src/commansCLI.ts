@@ -7,7 +7,7 @@ import { EditTask, MarkTaskDone, MarkTaskInProgress } from "./commands/edit.js";
 const program = new Command()
 
 program
-    .version(1.1)
+    .version("1.1")
     .description("Software task manager CLI")
 
 program
