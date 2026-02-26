@@ -2,6 +2,7 @@ import inquirer from "inquirer";
 import { Task } from "../domain/Task.js";
 import { TaskRepository } from "../repository/TaskRepository.js";
 import { Status } from "../domain/Status.enum.js";
+import 'colors'
 
 export class TaskService {
   constructor(private taskRepository: TaskRepository) {}
@@ -20,6 +21,7 @@ export class TaskService {
   }
 
   async deleteTask(id: string): Promise<void> {
+    const task: Task = await this.taskRepository.findById(id);
     await this.taskRepository.deleteById(id);
     console.log("Task deleted successfully".green);
   }
@@ -30,7 +32,6 @@ export class TaskService {
   }
 
   async getTaskById(id: string): Promise<void> {
-    console.log(id);
     const task: Task = await  this.taskRepository.findById(id);
     console.table(task);
   }

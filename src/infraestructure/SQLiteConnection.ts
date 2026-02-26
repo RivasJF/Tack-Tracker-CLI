@@ -5,11 +5,12 @@ export class SQLiteConnection {
     private readonly instance: SqliteType;
 
     constructor() {
-        this.instance = new Database("database.sqlite", {
-            verbose: console.log
-        });
+        // this.instance = new Database("database.sqlite", {
+        //     verbose: console.log
+        // });
+        this.instance = new Database("database.sqlite");
 
-        this.instance.pragma('journal_mode = WAL');
+        //this.instance.pragma('journal_mode = WAL');
 
         this.init(); 
     }
