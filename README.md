@@ -1,6 +1,8 @@
 # Task Tracker CLI
 
-Un gestor de tareas de línea de comandos (CLI) desarrollado con Node.js que permite crear, editar, eliminar y gestionar tareas de forma eficiente desde la terminal.
+## Version 2.0
+
+Un gestor de tareas de línea de comandos (CLI) desarrollado con Node.js y TypeScript que permite crear, editar, eliminar y gestionar tareas de forma eficiente desde la terminal, ahora con almacenamiento en SQLite.
 
 ## 📋 Descripción del Proyecto
 
@@ -30,7 +32,12 @@ cd Tack-Tracker-CLI
 npm install
 ```
 
-3. Instala el comando global (bin):
+3. Compila el proyecto de TypeScript:
+```bash
+npm run build
+```
+
+4. Instala el comando global (bin):
 ```bash
 npm link
 ```
@@ -43,9 +50,10 @@ El proyecto utiliza las siguientes dependencias:
 
 ```json
 {
-  "colors": "^1.4.0",      // Colores para la consola
-  "commander": "^13.1.0",  // Framework para CLI
-  "inquirer": "^12.3.2"    // Prompts interactivos
+  "better-sqlite3": "^12.6.2", // Base de datos SQLite
+  "colors": "^1.4.0",           // Colores para la consola
+  "commander": "^13.1.0",       // Framework para CLI
+  "inquirer": "^12.3.2"         // Prompts interactivos
 }
 ```
 
@@ -86,7 +94,7 @@ Muestra solo las tareas con estado "todo" en color amarillo.
 ### Listar tareas en progreso
 ```bash
 tasks list-in-progress
-# o usando el alias
+# o usando elalias
 tasks lp
 ```
 Muestra solo las tareas con estado "in progress" en color azul.
@@ -97,7 +105,7 @@ tasks list-done
 # o usando el alias
 tasks ld
 ```
-Muestra solo las tareas completadas en color verde.
+Muestra solo las tareas con estado "done" en color verde.
 
 ### Editar una tarea
 ```bash
@@ -163,50 +171,49 @@ tasks -h
 ```
 Tack-Tracker-CLI/
 ├── src/
-│   ├── index.js              # Punto de entrada principal
-│   ├── commansCLI.js         # Definición de comandos CLI
-│   ├── commands/
-│   │   ├── add.js            # Comando para crear tareas
-│   │   ├── delete.js         # Comando para eliminar tareas
-│   │   ├── edit.js           # Comando para editar tareas
-│   │   ├── read.js           # Funciones para leer tareas
-│   │   └── write.js          # Funciones para escribir tareas
-│   └── Data/
-│       └── index.json        # Archivo de almacenamiento de tareas
-├── package.json              # Configuración del proyecto
-└── README.md                 # Este archivo
+│   ├── index.ts                  # Punto de entrada principal
+│   ├── commansCLI.ts             # Definición de comandos CLI
+│   ├── domain/
+│   │   ├── Status.enum.ts        # Enum para los estados de las tareas
+│   │   └── Task.ts               # Clase que representa una tarea
+│   ├── infraestructure/
+│   │   ├── SQLiteConnection.ts   # Conexión a la base de datos SQLite
+│   │   └── SQLiteRepository.ts   # Repositorio de tareas con SQLite
+│   ├── repository/
+│   │   └── TaskRepository.ts     # Interfaz del repositorio de tareas
+│   └── service/
+│       └── TasksService.ts       # Lógica de negocio de las tareas
+├── dist/                         # Carpeta de salida de la compilación
+├── package.json                  # Configuración del proyecto
+└── README.md                     # Este archivo
 ```
 
 ## 💾 Almacenamiento de Datos
 
-Las tareas se almacenan en un archivo JSON (`src/Data/index.json`) con la siguiente estructura:
+Las tareas se almacenan en una base de datos SQLite (`task-tracker.db`). La tabla `tasks` tiene la siguiente estructura:
 
-```json
-{
-  "task": [
-    {
-      "id": 1,
-      "desciption": "Mi primera tarea",
-      "status": "todo",
-      "createdAt": "Mon, 09 Feb 2026 18:41:50 GMT",
-      "updrade": "Mon, 09 Feb 2026 18:41:50 GMT"
-    }
-  ]
-}
-```
+| Columna       | Tipo          | Descripción                              |
+|---------------|---------------|------------------------------------------|
+| `id`          | `INTEGER`     | Identificador único de la tarea (PK)     |
+| `description` | `TEXT`        | Descripción de la tarea                  |
+| `status`      | `TEXT`        | Estado de la tarea (`todo`, `in progress`, `done`) |
+| `createdAt`   | `TEXT`        | Fecha de creación de la tarea            |
+| `updatedAt`   | `TEXT`        | Última fecha de actualización de la tarea |
+
 
 ### Estados disponibles:
-- `todo` - Tarea pendiente 
-- `in progress` - Tarea en progreso 
-- `done` - Tarea completada 
+- `todo` - Tarea pendiente
+- `in progress` - Tarea en progreso
+- `done` - Tarea completada
 
 ## 🎨 Características
 
-- **Interfaz interactiva**: Usa prompts para facilitar la entrada de datos
-- **Código con colores**: Las tareas se muestran en diferentes colores según su estado
-- **IDs automáticos**: Las tareas obtienen IDs secuenciales automáticamente
-- **Gestión completa**: Crear, leer, actualizar y eliminar tareas
-- **Comando global**: Después de instalar con `npm link`, usa `tasks` desde cualquier directorio
+- **Interfaz interactiva**: Usa prompts para facilitar la entrada de datos.
+- **Código con colores**: Las tareas se muestran en diferentes colores según su estado.
+- **IDs automáticos**: Las tareas obtienen IDs autoincrementables.
+- **Gestión completa**: Crear, leer, actualizar y eliminar tareas.
+- **Comando global**: Después de instalar con `npm link`, usa `tasks` desde cualquier directorio.
+- **Persistencia en base de datos**: Los datos se guardan en una base de datos SQLite.
 
 ## 👨‍💻 Autor
 
@@ -216,17 +223,12 @@ Las tareas se almacenan en un archivo JSON (`src/Data/index.json`) con la siguie
 
 Este proyecto está bajo la licencia ISC.
 
-
 ## ❓ Solución de Problemas
 
 ### El comando `tasks` no se reconoce
-- Asegúrate de haber ejecutado `npm link`
-- Si estás en Windows, reinicia la terminal
+- Asegúrate de haber ejecutado `npm link`.
+- Si estás en Windows, reinicia la terminal.
 
 ### Las dependencias no se instalan
-- Elimina la carpeta `node_modules` y el archivo `package-lock.json`
-- Ejecuta `npm install` nuevamente
-
-### Las tareas no se guardan
-- Verifica que exista la carpeta `src/Data/`
-- Asegúrate de tener permisos de escritura en esa carpeta
+- Elimina la carpeta `node_modules` y el archivo `package-lock.json`.
+- Ejecuta `npm install` nuevamente.

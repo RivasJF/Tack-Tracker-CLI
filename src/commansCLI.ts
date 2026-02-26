@@ -9,7 +9,7 @@ const ITaskService = new TaskService(TaskRepository)
 const program = new Command()
 
 program
-    .version("1.1")
+    .version("2.0")
     .description("Software task manager CLI")
 
 program
