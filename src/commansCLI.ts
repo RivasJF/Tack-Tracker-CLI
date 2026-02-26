@@ -1,8 +1,10 @@
 import { Command } from "commander";
-import { readJsonAll,readJsonInProgress,readJsonDone,readJsonTodo} from "./commands/read.js";
-import { CreateTask } from "./commands/add.js";
-import { DeleteTask } from "./commands/delete.js";
-import { EditTask, MarkTaskDone, MarkTaskInProgress } from "./commands/edit.js";
+import { SQLiteRepository } from "./infraestructure/SQLiteRepository.js";
+import { TaskService } from "./service/TasksService.js";
+import { Status } from "./domain/Status.enum.js";
+
+const TaskRepository = new SQLiteRepository;
+const ITaskService = new TaskService(TaskRepository)
 
 const program = new Command()
 
@@ -15,15 +17,15 @@ program
     .alias('d')
     .description("delete Task for id")
     .action(async (id) => {
-        await DeleteTask(id)
+        ITaskService.deleteTask(id)
     })
 
 program
     .command('edit <id>')
     .alias('e')
-    .description("edit task for id")
+    .description("edit description Task for id")
     .action(async (id) => {
-        await EditTask(id)
+        ITaskService.updateTaskDescription(id)
     })
 
 program
@@ -31,7 +33,7 @@ program
     .alias('mip')
     .description("Mark Task in-progress")
     .action(async (id) => {
-        await MarkTaskInProgress(id)
+        ITaskService.updateTaskStatus(id,Status.IN_PROGRESS)
     })
 
 program
@@ -39,7 +41,7 @@ program
     .alias('md')
     .description("Mark Task done")
     .action(async (id) => {
-        await MarkTaskDone(id)
+        ITaskService.updateTaskStatus(id,Status.DONE);
     })
 
 program
@@ -47,7 +49,7 @@ program
     .alias('a')
     .description("Creat new task")
     .action(async () => {
-        await CreateTask()
+       ITaskService.createTask()
     })
 
 program
@@ -55,7 +57,7 @@ program
     .alias('l')
     .description("list All Task")
     .action(async () => {
-        console.table( await readJsonAll())
+        ITaskService.getAllTasks()
     })
 
 program
@@ -63,7 +65,7 @@ program
     .alias('ld')
     .description("list task done")
     .action(async () => {
-        console.table( await readJsonDone())
+       ITaskService.getTasksByStatus(Status.DONE)
     })
 
 program
@@ -71,7 +73,7 @@ program
     .alias('lt')
     .description("list task todo")
     .action(async () => {
-        console.table( await readJsonTodo())
+        ITaskService.getTasksByStatus(Status.TODO)
     })
 
 program
@@ -79,7 +81,7 @@ program
     .alias('lp')
     .description("list task in-progress")
     .action(async () => {
-        console.table( await readJsonInProgress())
+        ITaskService.getTasksByStatus(Status.IN_PROGRESS)
     })
 
 export {program}

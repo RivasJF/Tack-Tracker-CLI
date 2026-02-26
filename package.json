@@ -18,11 +18,13 @@
   "author": "RivasJF",
   "license": "ISC",
   "dependencies": {
+    "better-sqlite3": "^12.6.2",
     "colors": "^1.4.0",
     "commander": "^13.1.0",
     "inquirer": "^12.3.2"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^25.3.0",
     "typescript": "^5.9.3"
   },
